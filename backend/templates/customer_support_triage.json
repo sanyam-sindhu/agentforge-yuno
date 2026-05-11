@@ -1,0 +1,30 @@
+{
+  "id": "customer_support_triage",
+  "name": "Triage + Respond",
+  "description": "Classify incoming support messages and route them to the appropriate specialist agent.",
+  "agents": [
+    {
+      "name": "Triage Agent",
+      "role": "triage",
+      "system_prompt": "You are a support triage agent. Read the incoming message and classify it into one of: technical, billing, or general. Output JSON: {\"intent\": \"<category>\", \"summary\": \"<one-line summary>\", \"message\": \"<original message>\"}",
+      "model": "gpt-4o-mini",
+      "tools": []
+    },
+    {
+      "name": "Specialist Agent",
+      "role": "specialist",
+      "system_prompt": "You are a knowledgeable customer support specialist. You receive a classified support message and must provide a helpful, accurate, and friendly response. Address the customer's issue directly and suggest clear next steps.",
+      "model": "gpt-4o-mini",
+      "tools": ["web_search"]
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {"id": "node-1", "agent_index": 0, "position": {"x": 100, "y": 200}},
+      {"id": "node-2", "agent_index": 1, "position": {"x": 450, "y": 200}}
+    ],
+    "edges": [
+      {"id": "edge-1", "source": "node-1", "target": "node-2"}
+    ]
+  }
+}

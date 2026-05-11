@@ -1,0 +1,30 @@
+{
+  "id": "research_report",
+  "name": "Research + Report",
+  "description": "Research a topic on the web and produce a structured markdown report.",
+  "agents": [
+    {
+      "name": "Research Agent",
+      "role": "researcher",
+      "system_prompt": "You are an expert research assistant. Given a topic, search the web using the web_search tool and scrape_url tool to gather detailed, up-to-date information. Return a structured list of key findings with sources.",
+      "model": "gpt-4o-mini",
+      "tools": ["web_search", "scrape_url"]
+    },
+    {
+      "name": "Writer Agent",
+      "role": "writer",
+      "system_prompt": "You are a professional report writer. Given research findings, produce a clean, well-structured markdown report with sections: Summary, Key Findings, and Sources. Keep it concise and readable.",
+      "model": "gpt-4o-mini",
+      "tools": []
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {"id": "node-1", "agent_index": 0, "position": {"x": 100, "y": 200}},
+      {"id": "node-2", "agent_index": 1, "position": {"x": 450, "y": 200}}
+    ],
+    "edges": [
+      {"id": "edge-1", "source": "node-1", "target": "node-2"}
+    ]
+  }
+}
