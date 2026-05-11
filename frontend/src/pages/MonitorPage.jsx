@@ -13,16 +13,17 @@ const statusColor = { completed: "green", pending: "yellow", running: "blue", fa
 export function MonitorPage() {
   const { events, connected, clear } = useWebSocket();
   const { data: executions = [] } = useExecutions();
-  const [selectedExecution, setSelectedExecution] = useState(null);
+  const [selectedId, setSelectedId] = useState(null);
+  const selectedExecution = executions.find((e) => e.id === selectedId) ?? null;
 
   return (
     <div className="flex h-full">
       <div className="w-64 border-r border-gray-200 p-4 flex flex-col gap-2 overflow-y-auto bg-white">
         <h3 className="text-sm font-semibold text-gray-800 mb-1">Executions</h3>
         {executions.map((ex) => (
-          <div key={ex.id} onClick={() => setSelectedExecution(ex)}
+          <div key={ex.id} onClick={() => setSelectedId(ex.id)}
             className={`rounded-lg border p-3 cursor-pointer transition-colors ${
-              selectedExecution?.id === ex.id ? "border-indigo-300 bg-indigo-50" : "border-gray-200 hover:border-gray-300"
+              selectedId === ex.id ? "border-indigo-300 bg-indigo-50" : "border-gray-200 hover:border-gray-300"
             }`}>
             <div className="flex items-center justify-between mb-1">
               <span className="text-xs font-medium text-gray-700">#{ex.id}</span>
