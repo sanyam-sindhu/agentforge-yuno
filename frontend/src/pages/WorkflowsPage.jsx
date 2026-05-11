@@ -68,7 +68,7 @@ export function WorkflowsPage() {
               </div>
             </div>
             <div className="flex-1 p-4">
-              <WorkflowCanvas agents={agents} nodes={canvasNodes} edges={canvasEdges}
+              <WorkflowCanvas key={selected.id} agents={agents} nodes={canvasNodes} edges={canvasEdges}
                 onChange={(n, e) => { setCanvasNodes(n); setCanvasEdges(e); }} />
             </div>
           </>
